@@ -339,8 +339,7 @@ def editItemDetails(category_id, item_id):
     """
     editedItem = session.query(CategoryItem).filter_by(id=item_id).first()
     creator = getUserInfo(editedItem.user_id)
-    if 'username' not in (login_session or creator.id !=
-                          login_session['user_id']):
+    if 'username' not in (login_session ):
         return redirect('/login')
     if request.method == 'POST':
         if request.form['title']:
@@ -375,8 +374,7 @@ def deleteItemDetails(category_id, item_id):
     """
     itemToDelete = session.query(CategoryItem).filter_by(id=item_id).first()
     creator = getUserInfo(itemToDelete.user_id)
-    if 'username' not in (login_session or creator.id !=
-                          login_session['user_id']):
+    if 'username' not in (login_session ): #or creator.id !=login_session['user_id']
         return redirect('/login')
     if request.method == 'POST':
         session.delete(itemToDelete)
